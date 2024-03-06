@@ -1,0 +1,72 @@
+version: '3.9'
+
+networks:
+  front-tier:
+    driver: bridge
+  back-tier:
+    driver: bridge
+
+services:
+  db:
+    image: postgres:16-alpine
+    ports:
+      - '5432:5432'
+
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+
+    volumes:
+      - ./data/db:/var/lib/postgresql/data/
+
+    networks:
+      - back-tier
+
+  # app:
+  #   build: ./backend/PatientChart
+  #   networks:
+  #     - front-tier
+  #     - back-tier
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    ports:
+      - '5173:5173'
+
+    volumes:
+      - ./frontend:/app/frontend
+
+    depends_on:
+      - backend
+    
+    networks:
+      - front-tier
+      - back-tier
+
+  backend: 
+    restart: always
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+
+    ports:
+      - '8000:8000'
+
+    volumes:
+      - ./backend:/app/backend
+
+    depends_on:
+      - db
+
+    networks:
+      - front-tier
+      - back-tier
