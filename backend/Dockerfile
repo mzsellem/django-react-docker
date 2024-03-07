@@ -14,8 +14,6 @@ RUN apk add --virtual .build-deps --no-cache postgresql-dev gcc python3-dev musl
 
 COPY . /app/backend/
 
-RUN ["python", "manage.py", "migrate"]
-
 # Expose port 8000 to the outside world
 EXPOSE 8000
 
