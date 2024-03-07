@@ -18,7 +18,7 @@ services:
       - POSTGRES_DB=postgres
 
     volumes:
-      - ./data/db:/var/lib/postgresql/data/
+      - dbdata:/var/lib/postgresql/data/
 
     networks:
       - back-tier
@@ -38,7 +38,7 @@ services:
       - '5173:5173'
 
     volumes:
-      - ./frontend:/app/frontend
+      - frontend:/app/frontend
 
     depends_on:
       - backend
@@ -62,7 +62,7 @@ services:
       - '8000:8000'
 
     volumes:
-      - ./backend:/app/backend
+      - backend:/app/backend
 
     depends_on:
       - db
@@ -70,3 +70,7 @@ services:
     networks:
       - front-tier
       - back-tier
+volumes:
+    dbdata:
+    backend:
+    frontend:
