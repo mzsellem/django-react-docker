@@ -16,7 +16,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>An Awesome Blog </h1>
-        <h3>On Django, React, Postgres, and Docker </h3>
+        <h3>On Django, React, Postgres, and summit </h3>
 
         <p>{data}</p>
       </header>
