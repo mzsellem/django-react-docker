@@ -57,7 +57,7 @@ export default function ResponsiveAppBar() {
                </Box>
 
                <Box sx={{ flexGrow: 0 }}>
-                  <Tooltip>
+                  <Tooltip title="Marley's Avatar">
                      <IconButton sx={{ p: 0 }}>
                         <Avatar alt="Marley's Avatar" src="/flower.jpg" />
                      </IconButton>
