@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     # routes to the views
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     path('', views.index, name="index"),
     path('patients/', views.patients, name="patients"),
 ]
