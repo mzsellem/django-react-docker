@@ -169,7 +169,7 @@ interface Patient {
      };
   
      useEffect(() => {
-        console.log({ patientToUpdate });
+        console.log("patientToUpdate in useEffect in patient.tsx", patientToUpdate );
      }, [patientToUpdate]);
      // If the Edit button is clicked, set the patient to update and show the form
      const handleEdit = (patient: Patient) => {
@@ -187,16 +187,6 @@ interface Patient {
    return (
       <>
          <Navbar />
-         <div>
-                <h1>List of Patients</h1>
-                <ul>
-                    {details.map((patient) => (
-                        <li key={patient.id}>
-                            {patient.first_name} {patient.last_name}
-                        </li>
-                    ))}
-                </ul>
-            </div>
          <div className="flex flex-col">
             <div>
                <div className="flex justify-center pt-8 pb-4">

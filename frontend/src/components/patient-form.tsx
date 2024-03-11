@@ -1,18 +1,29 @@
 // src/Form.js
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 
-export default function Form({ patientToUpdate, updatePatient }) {
-   //If patient needs to be updated, prefill form with selected patient
-   const [formData, setFormData] = useState({ ...patientToUpdate } || {});
+interface Patient {
+   firstName: string;
+   lastName: string;
+   age: string;
+   diagnosis?: string; // Assuming this property is optional
+ }
+interface FormProps {
+   patientToUpdate: Patient;
+   updatePatient: (formData: Patient) => void;
+ }
 
-   const handleChange = (e) => {
+export default function Form({ patientToUpdate, updatePatient }: FormProps) {
+   //If patient needs to be updated, prefill form with selected patient
+   const [formData, setFormData] = useState(patientToUpdate);
+
+   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
       setFormData({ ...formData, [name]: value });
    };
 
    //Handle both create and update in one form: update the patient, otherwise create a new patient
-   function handleSubmit(e) {
+   function handleSubmit(e: FormEvent<HTMLFormElement>) {
       if (patientToUpdate) {
          e.preventDefault();
          updatePatient(formData);
