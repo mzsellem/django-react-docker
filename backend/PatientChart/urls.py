@@ -7,4 +7,5 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('', views.index, name="index"),
     path('patients/', views.patients, name="patients"),
+    path('api/patients/', views.PatientView.as_view({'get': 'list'}), name="patientview"),
 ]
