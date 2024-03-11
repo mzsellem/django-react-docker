@@ -109,7 +109,9 @@ interface Patient {
         axios
            .get("http://localhost:8000/api/patients")
            .then((res) => {
+            console.log(res)
               const data: Patient[] = res.data; // Define type of data
+              console.log("data in call", data)
               setDetails(data);
            })
            .catch((err) => {
@@ -185,6 +187,16 @@ interface Patient {
    return (
       <>
          <Navbar />
+         <div>
+                <h1>List of Patients</h1>
+                <ul>
+                    {details.map((patient) => (
+                        <li key={patient.id}>
+                            {patient.first_name} {patient.last_name}
+                        </li>
+                    ))}
+                </ul>
+            </div>
          <div className="flex flex-col">
             <div>
                <div className="flex justify-center pt-8 pb-4">
