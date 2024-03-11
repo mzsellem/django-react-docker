@@ -13,7 +13,7 @@ export default function Home() {
    return (
       <>
          <Navbar />
-         <div className="flex text-3xl justify-center p-8">Hello BeyondMD!</div>
+         <div className="flex justify-center p-8 text-3xl">Hello BeyondMD!</div>
          <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
             <Viewer
                fileUrl="resume.pdf"
