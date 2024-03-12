@@ -19,13 +19,14 @@ from django.urls import include, path
 from django.urls import re_path as url 
 from PatientChart import views
 from PatientChart.views import *
-from rest_framework import routers
+from rest_framework.routers import DefaultRouter
 
-router = routers.DefaultRouter()
+router = DefaultRouter()
 router.register(r"patients", views.PatientViewSet, 'patient')
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/", include(router.urls)), 
     # connects PatientChart to rest of project
-    path("", include("PatientChart.urls")),
+    # path("", include("PatientChart.urls")),
 ]
