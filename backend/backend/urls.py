@@ -22,7 +22,7 @@ from PatientChart.views import *
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r"patients", views.PatientView, 'patient')
+router.register(r"patients", views.PatientViewSet, 'patient')
 
 urlpatterns = [
     path("admin/", admin.site.urls),
