@@ -12,18 +12,11 @@ export interface Patient {
     age: number;
     diagnosis?: string; // diagnosis is optional
   }
-
-  const defaultPatient: Patient = {
-    id: 0,
-    lastName: "",
-    firstName: "",
-    age: 0,
-};
   
   export default function Patients() {
      const [details, setDetails] = useState<Patient[]>([]); // Define type of details
      const [showForm, setShowForm] = useState<boolean>(false);
-     const [patientToUpdate, setPatientToUpdate] = useState<Patient>(defaultPatient); // Define type of patientToUpdate
+     const [patientToUpdate, setPatientToUpdate] = useState<Patient>({} as Patient); // Define type of patientToUpdate
      const [selectedPatient, setSelectedPatient] = useState<number | null>(null); // Define type of selectedPatient
      const [selectedDiagnosis, setSelectedDiagnosis] = useState<string | null>(null); // Define type of selectedDiagnosis
      const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -148,13 +141,13 @@ export interface Patient {
      };
   
      // Update a patient
-     const updatePatient = (formData: Patient) => { // Define type of updatedFormData
+     const updatePatient = (formData: Patient | null) => { // Define type of updatedFormData
         axios
            .put(`http://localhost:8000/api/patients/${patientToUpdate!.id}/`, {
               //Reformat data: snake to camel case because of django backend and js frontend
-              first_name: formData.firstName,
-              last_name: formData.lastName,
-              age: formData.age,
+              first_name: formData?.firstName,
+              last_name: formData?.lastName,
+              age: formData?.age,
            })
            .then((res) => {
               // Update the patient data on the frontend with the updatedFormData
@@ -166,7 +159,7 @@ export interface Patient {
                  )
               );
               // Clear the patientToUpdate state and hide the form
-              setPatientToUpdate(defaultPatient);
+              setPatientToUpdate({} as Patient);
               setIsEditing(false); // Set back to non-editing mode
               setShowForm(false);
            })

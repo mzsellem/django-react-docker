@@ -4,7 +4,9 @@ import axios from "axios";
 import { Patient } from "../routes/patients";
 interface FormProps {
    patientToUpdate: Patient;
-   updatePatient: (formData: Patient) => void;
+   
+   // TODO: could be a problem later, check back in
+   updatePatient: (formData: Patient | null) => void;
  }
 
 export default function Form({ patientToUpdate, updatePatient }: FormProps) {
@@ -15,7 +17,17 @@ export default function Form({ patientToUpdate, updatePatient }: FormProps) {
    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       console.log("e.target", e.target)
       const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
+      if(formData) {
+         setFormData({ ...formData, [name]: value });
+      } else {
+         setFormData({
+            id: 0,
+            lastName: "",
+            firstName: "",
+            age: 0,
+            diagnosis: ""
+         })
+      }
    };
 
    //Handle both create and update in one form: update the patient, otherwise create a new patient
@@ -27,9 +39,9 @@ export default function Form({ patientToUpdate, updatePatient }: FormProps) {
          axios
             .post("http://localhost:8000/api/patients/", {
                //Reformat data: snake to camel case because of django backend and js frontend
-               first_name: formData.firstName,
-               last_name: formData.lastName,
-               age: formData.age,
+               first_name: formData?.firstName,
+               last_name: formData?.lastName,
+               age: formData?.age,
             })
             .then((res) => console.log("Success!", res))
             .catch((err) => console.log("Error!", err));
