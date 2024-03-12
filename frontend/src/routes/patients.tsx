@@ -7,16 +7,23 @@ import ICD10Search from "../components/icd";
 
 export interface Patient {
     id: number;
-    last_name: string;
-    first_name: string;
+    lastName: string;
+    firstName: string;
     age: number;
     diagnosis?: string; // diagnosis is optional
   }
+
+  const defaultPatient: Patient = {
+    id: 0,
+    lastName: "",
+    firstName: "",
+    age: 0,
+};
   
   export default function Patients() {
      const [details, setDetails] = useState<Patient[]>([]); // Define type of details
      const [showForm, setShowForm] = useState<boolean>(false);
-     const [patientToUpdate, setPatientToUpdate] = useState<Patient | null>(null); // Define type of patientToUpdate
+     const [patientToUpdate, setPatientToUpdate] = useState<Patient>(defaultPatient); // Define type of patientToUpdate
      const [selectedPatient, setSelectedPatient] = useState<number | null>(null); // Define type of selectedPatient
      const [selectedDiagnosis, setSelectedDiagnosis] = useState<string | null>(null); // Define type of selectedDiagnosis
      const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -96,13 +103,16 @@ export interface Patient {
         },
      ];
   
-     const rows = details.map((patient) => ({
-        id: patient.id,
-        lastName: patient.last_name,
-        firstName: patient.first_name,
-        age: patient.age,
-        diagnosis: patient.diagnosis,
-     }));
+     const rows = details.map((patient) => {
+        console.log({patient})
+        return ({
+            id: patient.id,
+            lastName: patient.lastName,
+            firstName: patient.firstName,
+            age: patient.age,
+            diagnosis: patient.diagnosis,
+         })
+     });
   
      //Get patients from the database
      useEffect(() => {
@@ -142,8 +152,8 @@ export interface Patient {
         axios
            .put(`http://localhost:8000/api/patients/${patientToUpdate!.id}/`, {
               //Reformat data: snake to camel case because of django backend and js frontend
-              first_name: formData.first_name,
-              last_name: formData.last_name,
+              first_name: formData.firstName,
+              last_name: formData.lastName,
               age: formData.age,
            })
            .then((res) => {
@@ -156,7 +166,7 @@ export interface Patient {
                  )
               );
               // Clear the patientToUpdate state and hide the form
-              setPatientToUpdate(null);
+              setPatientToUpdate(defaultPatient);
               setIsEditing(false); // Set back to non-editing mode
               setShowForm(false);
            })

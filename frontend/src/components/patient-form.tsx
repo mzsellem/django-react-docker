@@ -10,8 +10,10 @@ interface FormProps {
 export default function Form({ patientToUpdate, updatePatient }: FormProps) {
    //If patient needs to be updated, prefill form with selected patient
    const [formData, setFormData] = useState(patientToUpdate);
+   console.log({formData})
 
    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+      console.log("e.target", e.target)
       const { name, value } = e.target;
       setFormData({ ...formData, [name]: value });
    };
@@ -25,8 +27,8 @@ export default function Form({ patientToUpdate, updatePatient }: FormProps) {
          axios
             .post("http://localhost:8000/api/patients/", {
                //Reformat data: snake to camel case because of django backend and js frontend
-               first_name: formData.first_name,
-               last_name: formData.last_name,
+               first_name: formData.firstName,
+               last_name: formData.lastName,
                age: formData.age,
             })
             .then((res) => console.log("Success!", res))
@@ -43,7 +45,7 @@ export default function Form({ patientToUpdate, updatePatient }: FormProps) {
                   className="border"
                   type="text"
                   name="lastName"
-                  value={formData.last_name}
+                  value={formData.lastName}
                   onChange={handleChange}
                />
             </div>
@@ -53,7 +55,7 @@ export default function Form({ patientToUpdate, updatePatient }: FormProps) {
                   className="border"
                   type="text"
                   name="firstName"
-                  value={formData.first_name}
+                  value={formData.firstName}
                   onChange={handleChange}
                />
             </div>
@@ -73,7 +75,7 @@ export default function Form({ patientToUpdate, updatePatient }: FormProps) {
                   className="border"
                   type="text"
                   name="diagnosis"
-                  value=""
+                  value={formData.diagnosis || ""}
                   disabled
                />
             </div>
