@@ -188,65 +188,60 @@ export interface Patient {
      };
 
    return (
-      <>
-         <Navbar />
-         <div className="flex flex-col">
-            <div>
-               <div className="flex justify-center pt-8 pb-4">
-                  {showForm && (
-                     <PatientForm
-                        updatePatient={updatePatient}
-                        patientToUpdate={patientToUpdate}
-                     />
-                  )}
-               </div>
-            </div>
-         </div>
-         <div className="flex">
-            <div className="flex w-screen">
-                  <div className="flex items-center mb-4 ml-4 text-3xl">Patients
-                    <div className="flex">
-                        <button
-                            className="flex pl-1 pr-1 ml-2 text-white rounded p-1/2 bg-navbarblue"
-                            onClick={()=> {
-                                setShowForm(!showForm)
-                            }}>
-                                {showForm ? "-" : "+"}
-                        </button>
-                    </div>
-                  </div>
-            </div>
-         </div>
-         <div className="flex w-screen">
-            <div className="flex w-2/3">
-               <div className="ml-4">
-                  <DataGrid
-                     rows={rows}
-                     columns={columns}
-                     sortModel={sortModel}
-                     initialState={{
+    <>
+    <Navbar />
+    <div className="flex flex-col">
+        <div className="flex justify-center pt-8 pb-4">
+            {showForm && (
+                <PatientForm
+                    updatePatient={updatePatient}
+                    patientToUpdate={patientToUpdate}
+                />
+            )}
+        </div>
+    </div>
+    <div className="flex items-center justify-between w-full px-4 mb-2">
+        <div className="ml-4 text-3xl ">Patients
+        <button
+            className="p-1 pl-2 pr-2 ml-2 text-white rounded bg-navbarblue"
+            onClick={() => {
+                setShowForm(!showForm);
+            }}
+        >
+            {showForm ? "-" : "+"}
+        </button>
+        </div>
+    </div>
+    <div className="flex flex-wrap w-full px-4">
+        <div className="w-full lg:w-2/3 lg:pr-2">
+            <div className="ml-4">
+                <DataGrid
+                    rows={rows}
+                    columns={columns}
+                    sortModel={sortModel}
+                    initialState={{
                         pagination: {
-                           paginationModel: { page: 0, pageSize: 5 },
+                            paginationModel: { page: 0, pageSize: 5 },
                         },
-                     }}
-                     pageSizeOptions={[5, 10]}
-                     onSortModelChange={(newSortModel) =>
+                    }}
+                    pageSizeOptions={[5, 10]}
+                    onSortModelChange={(newSortModel) =>
                         setSortModel(newSortModel)
-                     }
-                  />
-               </div>
+                    }
+                />
             </div>
-            <div className="flex w-1/3">
-               <ICD10Search
-                  selectedDiagnosis={selectedDiagnosis}
-                  setSelectedDiagnosis={setSelectedDiagnosis}
-                  patientId={selectedPatient}
-                  setSelectedPatient={setSelectedPatient}
-                  patientInfo={patientToUpdate}
-                  setDetails={setDetails}
-               />
-            </div>
-         </div>
-      </>
+        </div>
+        <div className="w-full mt-4 lg:w-1/3 lg:pl-2 lg:mt-0">
+            <ICD10Search
+                selectedDiagnosis={selectedDiagnosis}
+                setSelectedDiagnosis={setSelectedDiagnosis}
+                patientId={selectedPatient}
+                setSelectedPatient={setSelectedPatient}
+                patientInfo={patientToUpdate}
+                setDetails={setDetails}
+            />
+        </div>
+    </div>
+</>
    );
 }
