@@ -5,7 +5,7 @@ import { DataGrid, GridColDef, GridSortModel } from "@mui/x-data-grid";
 import PatientForm from "../components/patient-form";
 import ICD10Search from "../components/icd";
 
-interface Patient {
+export interface Patient {
     id: number;
     last_name: string;
     first_name: string;
@@ -138,20 +138,20 @@ interface Patient {
      };
   
      // Update a patient
-     const updatePatient = (updatedFormData: Partial<Patient>) => { // Define type of updatedFormData
+     const updatePatient = (formData: Patient) => { // Define type of updatedFormData
         axios
            .put(`http://localhost:8000/api/patients/${patientToUpdate!.id}/`, {
               //Reformat data: snake to camel case because of django backend and js frontend
-              first_name: updatedFormData.first_name,
-              last_name: updatedFormData.last_name,
-              age: updatedFormData.age,
+              first_name: formData.first_name,
+              last_name: formData.last_name,
+              age: formData.age,
            })
            .then((res) => {
               // Update the patient data on the frontend with the updatedFormData
               setDetails((prevDetails) =>
                  prevDetails.map((patient) =>
                     patient.id === patientToUpdate!.id
-                       ? { ...patient, ...updatedFormData }
+                       ? { ...patient, ...formData }
                        : patient
                  )
               );

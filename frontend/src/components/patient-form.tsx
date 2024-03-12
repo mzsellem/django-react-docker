@@ -1,13 +1,7 @@
 // src/Form.js
 import { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
-
-interface Patient {
-   firstName: string;
-   lastName: string;
-   age: string;
-   diagnosis?: string; // Assuming this property is optional
- }
+import { Patient } from "../routes/patients";
 interface FormProps {
    patientToUpdate: Patient;
    updatePatient: (formData: Patient) => void;
@@ -31,8 +25,8 @@ export default function Form({ patientToUpdate, updatePatient }: FormProps) {
          axios
             .post("http://localhost:8000/api/patients/", {
                //Reformat data: snake to camel case because of django backend and js frontend
-               first_name: formData.firstName,
-               last_name: formData.lastName,
+               first_name: formData.first_name,
+               last_name: formData.last_name,
                age: formData.age,
             })
             .then((res) => console.log("Success!", res))
@@ -49,7 +43,7 @@ export default function Form({ patientToUpdate, updatePatient }: FormProps) {
                   className="border"
                   type="text"
                   name="lastName"
-                  value={formData.lastName}
+                  value={formData.last_name}
                   onChange={handleChange}
                />
             </div>
@@ -59,7 +53,7 @@ export default function Form({ patientToUpdate, updatePatient }: FormProps) {
                   className="border"
                   type="text"
                   name="firstName"
-                  value={formData.firstName}
+                  value={formData.first_name}
                   onChange={handleChange}
                />
             </div>
