@@ -1,5 +1,4 @@
 import Navbar from "../components/navbar";
-import Footer from "../components/footer";
 import { Worker } from "@react-pdf-viewer/core";
 import { Viewer } from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
@@ -21,7 +20,6 @@ export default function Home() {
                plugins={[pageNavigationPluginInstance]}
             />
          </Worker>
-         <Footer />
       </>
    );
 }

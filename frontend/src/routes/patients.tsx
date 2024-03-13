@@ -4,6 +4,7 @@ import axios from "axios";
 import { DataGrid, GridColDef, GridSortModel } from "@mui/x-data-grid";
 import PatientForm from "../components/patient-form";
 import ICD10Search from "../components/icd";
+import Footer from "../components/footer"
 
 export interface Patient {
     id: number;
@@ -242,6 +243,7 @@ export interface Patient {
             />
         </div>
     </div>
+    {/* <Footer /> */}
 </>
    );
 }

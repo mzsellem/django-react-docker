@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Home from "./routes/home";
 import Patients from "./routes/patients";
+import Footer from "./components/footer"
 
 const rootElement = document.getElementById("root");
 
@@ -22,6 +23,7 @@ if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
       <RouterProvider router={router} />
+      <Footer />
     </React.StrictMode>
   );
 } else {
