@@ -32,7 +32,8 @@ export default function Form({ patientToUpdate, updatePatient }: FormProps) {
 
    //Handle both create and update in one form: update the patient, otherwise create a new patient
    function handleSubmit(e: FormEvent<HTMLFormElement>) {
-      if (patientToUpdate && patientToUpdate.id) {
+      //if not default patient, update existing patient (0 is a falsy value)
+      if (patientToUpdate && patientToUpdate.id > 0) {
          e.preventDefault();
          updatePatient(formData);
       } else {
