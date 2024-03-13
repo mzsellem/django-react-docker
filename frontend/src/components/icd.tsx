@@ -21,6 +21,7 @@ export default function ICD10Search({
 }) {
    const [searchTerm, setSearchTerm] = useState("");
    const [results, setResults] = useState([]); // State to store the results of diagnosis search
+   const [showResults, setShowResults] = useState(true); // State to control whether to show or hide results
 
    const handleDiagnosisSelection = (code, description) => {
       setSelectedDiagnosis(code, description);
@@ -67,16 +68,22 @@ export default function ICD10Search({
             `https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name&terms=${searchTerm}`
          );
          setResults(response.data[3]);
+         setShowResults(true)
       } catch (error) {
          console.error("Error fetching data:", error);
       }
+   };
+
+   const toggleResults = () => {
+      // Toggle the state to show/hide results
+      setShowResults((prev) => !prev);
    };
 
    return (
       <>
          <div className="flex flex-col ml-4">
             <div className="flex mb-4">
-               <div className="flex items-center mr-2 text-xl">
+               <div className="flex items-center mr-2 text-lg">
                   ICD-10 Code Search
                </div>
                <div className="flex">
@@ -95,7 +102,20 @@ export default function ICD10Search({
                   </button>
                </div>
             </div>
-            <div>
+
+
+              {/* Conditionally render button based on showResults state and results length */}
+              {results.length > 0 && (
+               <button
+                  className={`p-2 text-white mb-2 ${showResults ? "bg-red-500 hover:bg-red-700" : "bg-buttonblue hover:bg-darkblue"} rounded`}
+                  onClick={toggleResults}
+               >
+                  {showResults ? "Hide Results" : "Show Results"}
+               </button>
+            )}
+
+            {showResults &&  results.length > 0 && (
+            <div style={{ maxHeight: "400px", overflowY: "auto" }}>
                <TableContainer component={Paper}>
                   <Table>
                      <TableHead>
@@ -129,6 +149,7 @@ export default function ICD10Search({
                   </Table>
                </TableContainer>
             </div>
+            )}
          </div>
       </>
    );

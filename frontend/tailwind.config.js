@@ -10,6 +10,7 @@ export default {
         navbarblue: '#1977d3',
         babyblue: '#60a5fb',
         darkblue: '#205ab2',
+        buttonblue: '#3b82f6',
       },
     },
   },
