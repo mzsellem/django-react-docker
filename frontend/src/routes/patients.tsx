@@ -19,7 +19,6 @@ export interface Patient {
      const [patientToUpdate, setPatientToUpdate] = useState<Patient>({} as Patient); // Define type of patientToUpdate
      const [selectedPatient, setSelectedPatient] = useState<number | null>(null); // Define type of selectedPatient
      const [selectedDiagnosis, setSelectedDiagnosis] = useState<string | null>(null); // Define type of selectedDiagnosis
-     const [isEditing, setIsEditing] = useState<boolean>(false);
      const [sortModel, setSortModel] = useState<GridSortModel>([
         {
            field: "id",
@@ -160,7 +159,6 @@ export interface Patient {
               );
               // Clear the patientToUpdate state and hide the form
               setPatientToUpdate({} as Patient);
-              setIsEditing(false); // Set back to non-editing mode
               setShowForm(false);
            })
            .catch((err) => {
@@ -171,13 +169,9 @@ export interface Patient {
            });
      };
   
-     useEffect(() => {
-        console.log("patientToUpdate in useEffect in patient.tsx", patientToUpdate );
-     }, [patientToUpdate]);
      // If the Edit button is clicked, set the patient to update and show the form
      const handleEdit = (patient: Patient) => {
         setPatientToUpdate(patient);
-        setIsEditing(true);
         setShowForm(true);
      };
   
