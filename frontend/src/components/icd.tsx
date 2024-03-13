@@ -9,6 +9,16 @@ import {
    TableRow,
    Paper,
 } from "@mui/material";
+import { Patient } from "../routes/patients";
+
+interface ICD10SearchProps {
+   selectedDiagnosis: string,
+   setSelectedDiagnosis: React.Dispatch<React.SetStateAction<string>>,
+   patientId: number | null,
+   setSelectedPatient: React.Dispatch<React.SetStateAction<number | null>>,
+   patientInfo: Patient,
+   setDetails: React.Dispatch<React.SetStateAction<Patient[]>>
+}
 
 export default function ICD10Search({
    //Pass this data from patients.jsx as props to use in icd.jsx
@@ -17,14 +27,14 @@ export default function ICD10Search({
    patientId,
    setSelectedPatient,
    patientInfo,
-   setDetails,
-}) {
+   setDetails
+}: ICD10SearchProps) {
    const [searchTerm, setSearchTerm] = useState("");
    const [results, setResults] = useState([]); // State to store the results of diagnosis search
    const [showResults, setShowResults] = useState(true); // State to control whether to show or hide results
 
-   const handleDiagnosisSelection = (code, description) => {
-      setSelectedDiagnosis(code, description);
+   const handleDiagnosisSelection = (code: string) => {
+      setSelectedDiagnosis(code);
    };
 
    useEffect(() => {
@@ -38,7 +48,7 @@ export default function ICD10Search({
                last_name: patientInfo.lastName,
                first_name: patientInfo.firstName,
             })
-            .then((res) => {
+            .then(() => {
                // Handle success: update the patient data in 'details' state with the updated diagnosis
                setDetails((prevDetails) =>
                   prevDetails.map((patient) =>
@@ -49,7 +59,7 @@ export default function ICD10Search({
                );
                // Clear the selected patient and diagnosis
                setSelectedPatient(null);
-               setSelectedDiagnosis(null);
+               setSelectedDiagnosis("");
             })
             .catch((err) => {
                console.error("Error adding diagnosis:", err);
@@ -140,8 +150,7 @@ export default function ICD10Search({
                                     className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
                                     onClick={() =>
                                        handleDiagnosisSelection(
-                                          result[0],
-                                          result[1]
+                                          result[0]
                                        )
                                     }
                                  >

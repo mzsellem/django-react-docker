@@ -18,7 +18,7 @@ export interface Patient {
      const [showForm, setShowForm] = useState<boolean>(false);
      const [patientToUpdate, setPatientToUpdate] = useState<Patient>({} as Patient); // Define type of patientToUpdate
      const [selectedPatient, setSelectedPatient] = useState<number | null>(null); // Define type of selectedPatient
-     const [selectedDiagnosis, setSelectedDiagnosis] = useState<string | null>(null); // Define type of selectedDiagnosis
+     const [selectedDiagnosis, setSelectedDiagnosis] = useState<string>(""); // Define type of selectedDiagnosis
      const [sortModel, setSortModel] = useState<GridSortModel>([
         {
            field: "id",
