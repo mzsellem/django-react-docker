@@ -125,7 +125,7 @@ export interface Patient {
      const handleDelete = (patientId: number) => {
         axios
            .delete(`http://localhost:8000/api/patients/${patientId}`)
-           .then((res) => {
+           .then(() => {
               // Delete the patient from the frontend and display remaining patients
               setDetails((prevDetails) =>
                  prevDetails.filter((patient) => patient.id !== patientId)
@@ -148,7 +148,7 @@ export interface Patient {
               last_name: formData?.lastName,
               age: formData?.age,
            })
-           .then((res) => {
+           .then(() => {
               // Update the patient data on the frontend with the updatedFormData
               setDetails((prevDetails) =>
                  prevDetails.map((patient) =>
