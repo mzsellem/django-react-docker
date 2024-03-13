@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { MouseEvent, useState } from "react"
 import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,9 +14,9 @@ const pages = ["Home", "Patients"];
 
 // App bar from MUI
 export default function ResponsiveAppBar() {
-  const [menuEl, setMenuEl] = useState(null);
+  const [menuEl, setMenuEl] = useState<null | HTMLElement>(null);
 
-  const handleMenuOpen = (event) => {
+  const handleMenuOpen = (event:MouseEvent<HTMLButtonElement>) => {
     setMenuEl(event.currentTarget);
   };
 
