@@ -14,12 +14,14 @@ export default function Home() {
       <>
          <Navbar />
          <div className="flex justify-center p-8 text-3xl">Hello BeyondMD!</div>
-         <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-            <Viewer
-               fileUrl="resume.pdf"
-               plugins={[pageNavigationPluginInstance]}
-            />
-         </Worker>
+         <div style={{ width: '130vh', height: '68vh', margin: 'auto', overflow: 'auto' }}>
+            <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+               <Viewer
+                  fileUrl="resume.pdf"
+                  plugins={[pageNavigationPluginInstance]}
+               />
+            </Worker>
+         </div>
       </>
    );
 }
