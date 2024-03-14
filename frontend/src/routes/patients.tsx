@@ -197,11 +197,11 @@ export interface Patient {
     <div className="flex items-center justify-between w-full px-4 mb-2">
         <div className="ml-4 text-3xl ">Patients
         <button
-            className="pb-1 pl-2 pr-2 ml-2 text-white rounded-lg bg-navbarblue"
+            className="pb-1 ml-2 text-white rounded-lg bg-navbarblue"
             onClick={() => {
                 setShowForm(!showForm);
             }}
-            style={{ width: '40px', height: '40px' }}
+            style={{ fontSize: '1.6rem', lineHeight: '1.1', width: '30px', height: '30px' }}
         >
             {showForm ? "-" : "+"}
         </button>
