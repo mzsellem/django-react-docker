@@ -194,7 +194,7 @@ export interface Patient {
             )}
         </div>
     </div>
-    <div className="flex items-center justify-between w-full px-4 mb-2">
+    <div className="flex items-center justify-between w-full px-4 mb-3">
         <div className="ml-4 text-3xl ">Patients
         <button
             className="pb-1 ml-2 text-white rounded-lg bg-navbarblue"
