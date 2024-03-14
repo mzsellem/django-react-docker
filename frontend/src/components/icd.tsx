@@ -35,6 +35,8 @@ export default function ICD10Search({
 
    const handleDiagnosisSelection = (code: string) => {
       setSelectedDiagnosis(code);
+      setShowResults(false);
+      setSearchTerm("")
    };
 
    useEffect(() => {
