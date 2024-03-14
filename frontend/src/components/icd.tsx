@@ -86,11 +86,6 @@ export default function ICD10Search({
       }
    };
 
-   const toggleResults = () => {
-      // Toggle the state to show/hide results
-      setShowResults((prev) => !prev);
-   };
-
    return (
       <>
          <div className="flex flex-col ml-4">
