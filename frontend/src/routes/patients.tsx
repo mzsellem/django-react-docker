@@ -227,15 +227,26 @@ export interface Patient {
                 />
             </div>
         </div>
-        <div className="w-full mt-4 lg:w-1/3 lg:pl-2 lg:mt-0">
-            { showICD10Search && (<ICD10Search
+        <div className="flex justify-center w-full mt-4 lg:w-1/3 lg:pl-2 lg:mt-0">
+            { showICD10Search ? (<ICD10Search
                 selectedDiagnosis={selectedDiagnosis}
                 setSelectedDiagnosis={setSelectedDiagnosis}
                 patientId={selectedPatient}
                 setSelectedPatient={setSelectedPatient}
                 patientInfo={patientToUpdate}
                 setDetails={setDetails}
-            />)}
+            />) : (
+               <div className="p-4 border">
+                  <h1 className="mb-3 text-2xl">Directions:</h1>
+                  <ul className="space-y-4 text-lg">
+                     <li>1. <span className="italic">Create a patient</span> by clicking the <span className="font-bold">"+"</span> button. Click save or hit the enter key.</li>
+                     <li>2. <span className="italic">Add a diagnosis</span> by clicking the <span className="font-bold">Add Diagnosis</span> button. The ICD10 Search Bar will pop up and you can search for the proper ICD10 code for your patient.</li>
+                     <li>3. You can <span className="italic">edit your patient</span> by clicking <span className="font-bold">Edit.</span> The patient form will pop up and you can click save or hit the enter key after making your changes.</li>
+                  </ul>
+               </div>
+            )
+         
+         }
         </div>
     </div>
 </>
