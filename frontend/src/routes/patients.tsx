@@ -14,6 +14,7 @@ export interface Patient {
   }
   
   export default function Patients() {
+     const [showICD10Search, setShowICD10Search] = useState<boolean>(false); // State to manage ICD10 search visibility
      const [details, setDetails] = useState<Patient[]>([]); // Define type of details
      const [showForm, setShowForm] = useState<boolean>(false);
      const [patientToUpdate, setPatientToUpdate] = useState<Patient>({} as Patient); // Define type of patientToUpdate
@@ -174,12 +175,12 @@ export interface Patient {
         setPatientToUpdate(patient);
         setShowForm(true);
      };
-  
+
      const handleDiagnosisButtonClick = (patient: Patient) => {
-        setSelectedPatient(patient.id);
-        // Set the selected patient data
-        setPatientToUpdate(patient);
-     };
+      setSelectedPatient(patient.id);
+      setPatientToUpdate(patient);
+      setShowICD10Search(true); // Show ICD10 search bar when the button is clicked
+  };
 
    return (
     <>
@@ -227,14 +228,14 @@ export interface Patient {
             </div>
         </div>
         <div className="w-full mt-4 lg:w-1/3 lg:pl-2 lg:mt-0">
-            <ICD10Search
+            { showICD10Search && (<ICD10Search
                 selectedDiagnosis={selectedDiagnosis}
                 setSelectedDiagnosis={setSelectedDiagnosis}
                 patientId={selectedPatient}
                 setSelectedPatient={setSelectedPatient}
                 patientInfo={patientToUpdate}
                 setDetails={setDetails}
-            />
+            />)}
         </div>
     </div>
 </>

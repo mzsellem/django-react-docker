@@ -119,18 +119,6 @@ export default function ICD10Search({
                   </button>
                </div>
             </div>
-
-
-              {/* Conditionally render button based on showResults state and results length */}
-              {results.length > 0 && (
-               <button
-                  className={`p-2 text-white mb-2 ${showResults ? "bg-red-500 hover:bg-red-700" : "bg-buttonblue hover:bg-darkblue"} rounded`}
-                  onClick={toggleResults}
-               >
-                  {showResults ? "Hide Results" : "Show Results"}
-               </button>
-            )}
-
             {showResults &&  results.length > 0 && (
             <div style={{ maxHeight: "400px", overflowY: "auto" }}>
                <TableContainer component={Paper}>
