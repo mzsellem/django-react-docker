@@ -28,9 +28,6 @@ export default function ResponsiveAppBar() {
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AddCircleOutlineOutlinedIcon
-            sx={{ display: { md: "flex" }, mr: 1,}}
-          />
           <Typography
             variant="h6"
             noWrap
