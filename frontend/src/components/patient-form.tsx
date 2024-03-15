@@ -13,10 +13,8 @@ interface FormProps {
 export default function Form({ patientToUpdate, updatePatient, getPatients }: FormProps) {
    //If patient needs to be updated, prefill form with selected patient
    const [formData, setFormData] = useState(patientToUpdate);
-   console.log({formData})
 
    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-      console.log("e.target", e.target)
       const { name, value } = e.target;
       if(formData) {
          setFormData({ ...formData, [name]: value });

@@ -97,7 +97,6 @@ export interface Patient {
      ];
   
      const rows = details.map((patient) => {
-        console.log({patient})
         return ({
             id: patient.id,
             lastName: patient.lastName,
@@ -114,7 +113,6 @@ export interface Patient {
       .then((res) => {
        console.log(res)
          const data: Patient[] = res.data; // Define type of data
-         console.log("data in call", data)
          setDetails(data);
       })
       .catch((err) => {
@@ -123,7 +121,6 @@ export interface Patient {
      }
 
      useEffect(() => {
-      console.log("rendering")
       getPatients();
      }, []);
   
