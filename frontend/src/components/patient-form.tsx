@@ -34,7 +34,6 @@ export default function Form({ patientToUpdate, updatePatient }: FormProps) {
    function handleSubmit(e: FormEvent<HTMLFormElement>) {
       //if not default patient, update existing patient (0 is a falsy value)
       if (patientToUpdate && patientToUpdate.id > 0) {
-         e.preventDefault();
          updatePatient(formData);
       } else {
          axios
