@@ -15,3 +15,9 @@ class PatientSerializer(CamelCaseModelSerializer):
     class Meta:
         model = Patient
         fields = '__all__'
+        
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        # Optionally, you can apply camelCase conversion here
+        # if needed, but in this case, we don't modify the data
+        return data
