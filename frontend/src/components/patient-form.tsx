@@ -8,9 +8,10 @@ interface FormProps {
    // TODO: could be a problem later, check back in
    updatePatient: (formData: Patient | null) => void;
    getPatients: () => void;
+   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
  }
 
-export default function Form({ patientToUpdate, updatePatient, getPatients }: FormProps) {
+export default function Form({ patientToUpdate, updatePatient, getPatients, setShowForm }: FormProps) {
    //If patient needs to be updated, prefill form with selected patient
    const [formData, setFormData] = useState(patientToUpdate);
 
@@ -45,6 +46,7 @@ export default function Form({ patientToUpdate, updatePatient, getPatients }: Fo
             })
             .then((res) => {
                getPatients()
+               setShowForm(false);
                console.log("Success!", res)
             })
             .catch((err) => console.log("Error!", err));

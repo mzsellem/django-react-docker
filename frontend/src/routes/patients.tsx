@@ -194,6 +194,7 @@ export interface Patient {
                     updatePatient={updatePatient}
                     patientToUpdate={patientToUpdate}
                     getPatients={getPatients}
+                    setShowForm={setShowForm}
                 />
             )}
         </div>
