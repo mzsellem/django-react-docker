@@ -83,23 +83,23 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     # for Docker
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': '5432',
-    }
-    # For local development  
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
     #     'NAME': 'postgres',
-    #     'USER': 'marleysellem',
+    #     'USER': 'postgres',
     #     'PASSWORD': 'postgres',
-    #     'HOST': 'localhost',
+    #     'HOST': 'db',
     #     'PORT': '5432',
     # }
+    # For local development  
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'marleysellem',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
 
 
