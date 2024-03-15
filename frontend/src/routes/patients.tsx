@@ -108,18 +108,23 @@ export interface Patient {
      });
   
      //Get patients from the database
+     const getPatients = () => {
+      axios
+      .get("http://localhost:8000/api/patients")
+      .then((res) => {
+       console.log(res)
+         const data: Patient[] = res.data; // Define type of data
+         console.log("data in call", data)
+         setDetails(data);
+      })
+      .catch((err) => {
+         console.log(err);
+      });
+     }
+
      useEffect(() => {
-        axios
-           .get("http://localhost:8000/api/patients")
-           .then((res) => {
-            console.log(res)
-              const data: Patient[] = res.data; // Define type of data
-              console.log("data in call", data)
-              setDetails(data);
-           })
-           .catch((err) => {
-              console.log(err);
-           });
+      console.log("rendering")
+      getPatients();
      }, []);
   
      //Delete a patient
@@ -191,6 +196,7 @@ export interface Patient {
                 <PatientForm
                     updatePatient={updatePatient}
                     patientToUpdate={patientToUpdate}
+                    getPatients={getPatients}
                 />
             )}
         </div>

@@ -4,12 +4,13 @@ import axios from "axios";
 import { Patient } from "../routes/patients";
 interface FormProps {
    patientToUpdate: Patient;
-   
+
    // TODO: could be a problem later, check back in
    updatePatient: (formData: Patient | null) => void;
+   getPatients: () => void;
  }
 
-export default function Form({ patientToUpdate, updatePatient }: FormProps) {
+export default function Form({ patientToUpdate, updatePatient, getPatients }: FormProps) {
    //If patient needs to be updated, prefill form with selected patient
    const [formData, setFormData] = useState(patientToUpdate);
    console.log({formData})
@@ -32,9 +33,9 @@ export default function Form({ patientToUpdate, updatePatient }: FormProps) {
 
    //Handle both create and update in one form: update the patient, otherwise create a new patient
    function handleSubmit(e: FormEvent<HTMLFormElement>) {
+      e.preventDefault();
       //if not default patient, update existing patient (0 is a falsy value)
       if (patientToUpdate && patientToUpdate.id > 0) {
-         e.preventDefault();
          updatePatient(formData);
       } else {
          axios
@@ -44,7 +45,10 @@ export default function Form({ patientToUpdate, updatePatient }: FormProps) {
                last_name: formData?.lastName,
                age: formData?.age,
             })
-            .then((res) => console.log("Success!", res))
+            .then((res) => {
+               getPatients()
+               console.log("Success!", res)
+            })
             .catch((err) => console.log("Error!", err));
       }
    }
