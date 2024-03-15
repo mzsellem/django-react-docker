@@ -10,14 +10,15 @@ class CamelCaseModelSerializer(serializers.ModelSerializer):
             camelcase_key = key.replace('_', ' ').title().replace(' ', '')
             camelcase_ret[camelcase_key[0].lower() + camelcase_key[1:]] = value
         return camelcase_ret
+    
+    def to_internal_value(self, data):
+        snake_case_data = {}
+        for key, value in data.items():
+            snake_case_key = ''.join(['_' + c.lower() if c.isupper() else c for c in key]).lstrip('_')
+            snake_case_data[snake_case_key] = value
+        return super().to_internal_value(snake_case_data)
 
 class PatientSerializer(CamelCaseModelSerializer):
     class Meta:
         model = Patient
         fields = '__all__'
-        
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        # Optionally, you can apply camelCase conversion here
-        # if needed, but in this case, we don't modify the data
-        return data
