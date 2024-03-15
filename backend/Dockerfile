@@ -20,4 +20,4 @@ EXPOSE 8000
 # Define the volume mount point
 VOLUME /app/backend/data
 
-CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
